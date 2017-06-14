@@ -50,7 +50,7 @@ class ChessBoard
             }
 
             if (isset($eventHandler)) {
-                $event = new FigureAddingEvent($this, $figure, $coordinates);
+                $event = $this->createAddingEvent($figure, $coordinates);
                 $eventHandler($event);
             }
 
@@ -117,5 +117,15 @@ class ChessBoard
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param $figure
+     * @param $coordinates
+     * @return FigureAddingEvent
+     */
+    protected function createAddingEvent($figure, $coordinates)
+    {
+        return new FigureAddingEvent($this, $figure, $coordinates);
     }
 }
